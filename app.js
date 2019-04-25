@@ -11,14 +11,11 @@ var promoRouter = require('./routes/promoRouter');
 var leaderRouter = require('./routes/leaderRouter');
 
 const mongoose = require('mongoose');
-mongoose.set('useNewUrlParser', true);
-mongoose.set('useFindAndModify', false);
-mongoose.set('useCreateIndex', true);
 
 const Dishes = require('./models/dishes');
 
-const url = 'mongodb://localhost/confusion';
-const connect = mongoose.connect(url, { useNewUrlParser: true });
+const url = 'mongodb://localhost:27017/confusion';
+const connect = mongoose.connect(url);
 connect.then(
   db => console.log('Connected correctly to the Server!'),
   err => console.log(err)
