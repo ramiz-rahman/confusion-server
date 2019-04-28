@@ -26,8 +26,18 @@ router.post('/signup', (req, res, next) => {
       res.setHeader('Content-Type', 'application/json');
       res.json({ err: err });
     } else {
-      const authenticate = passport.authenticate('local');
-      authenticate(req, res, _onAuthenticate);
+      if (req.body.firstname) user.firstname = req.body.firstname;
+      if (req.body.lastname) user.lastname = req.body.lasthame;
+      user.save((err, user) => {
+        if (err) {
+          res.status = 500;
+          res.setHeader('Content-Type', 'application/json');
+          res.json({ err: err });
+          return;
+        }
+        const authenticate = passport.authenticate('local');
+        authenticate(req, res, _onAuthenticate);
+      });
     }
   };
   User.register(user, password, _onRegister);
